@@ -72,19 +72,20 @@ button:active {
 /* ----------- */
 .numero-container {
   display: grid;
-  margin: 1rem auto;
+  place-content: center;
   max-width: 300px;
-  text-align: center;
+  margin: 2rem auto;
   gap: 1rem;
 }
 .numero-numero{
-  border: 5px outset lightgrey;
-  height: 50px;
-  align-self: center;
-  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 200px;
-  margin: auto;
-  
+  height: 50px;
+  border: 3px outset grey;
+  background-color: lightgray;
+  color: brown;
 }
 
 /* ----- */
