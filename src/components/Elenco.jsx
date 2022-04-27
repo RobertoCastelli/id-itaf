@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+// CONTEXT
+import { DataContext } from "../context";
 
 export const Elenco = () => {
+  const { anno, elencoDocs } = useContext(DataContext);
   return (
-    <div>
-      <ul>
-        <li>01/2022 - blablabla</li>
-        <li>02/2022 - blablabla</li>
-      </ul>
+    <div className="elenco-container">
+      {elencoDocs.length !== 0 ? (
+        <ul>
+          {elencoDocs.map((doc) => {
+            return (
+              <li key={doc.id}>
+                {doc.id}/{anno} - {doc.descrizione}
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div className="elenco-vuoto">
+          nessun documento presente nel database
+        </div>
+      )}
     </div>
   );
 };

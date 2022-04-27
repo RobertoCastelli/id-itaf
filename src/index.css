@@ -83,4 +83,15 @@ button {
 }
 .title-title {
   color: brown;
+  align-self: center;
+}
+.title-img {
+  transform: scale(0.8);
+}
+
+.elenco-container {
+  margin-top: 3rem;
+}
+.elenco-vuoto {
+  text-align: center;
 }

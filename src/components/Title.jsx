@@ -1,12 +1,8 @@
-import React, { useContext } from "react";
-// CONTEXT
-import { DataContext } from "../context";
+import React from "react";
 // IMAGES
 import logo from "../images/logo-itaf.png";
 
 export const Title = () => {
-  const { today } = useContext(DataContext);
-
   return (
     <div className="title-container">
       <h1 className="title-title">ID-ITAF</h1>

@@ -1,10 +1,11 @@
 import React from "react";
+// CONTEXT
+import ContextProvider from "./context";
 // COMPONENTS
 import { Title } from "./components/Title";
-import { NumeroProgressivo } from "./components/NumeroProgressivo";
 import { Elenco } from "./components/Elenco";
 import { Footer } from "./components/Footer";
-import ContextProvider from "./context";
+import { InputInfo } from "./components/Inputinfo";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <div className="container">
         <div className="content">
           <Title />
-          <NumeroProgressivo />
+          <InputInfo />
           <Elenco />
         </div>
         <Footer />
