@@ -4,7 +4,8 @@
 body {
   margin: 0;
   padding: 0;
-  letter-spacing: 0.08rem;
+  letter-spacing: 0.09rem;
+  font-size: 0.8rem;
   color: var(--black);
   font-family: "Verdana", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -59,6 +60,11 @@ button {
   height: 50px;
   margin: auto;
   color: brown;
+  border-radius: 0.5rem;
+  border: none;
+}
+button:active {
+  transform: translateY(2px);
 }
 
 /* ----------- */
@@ -94,4 +100,9 @@ button {
 }
 .elenco-vuoto {
   text-align: center;
+}
+
+
+.elenco-li{
+  font-size: small;
 }

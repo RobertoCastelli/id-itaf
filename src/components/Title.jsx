@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 // IMAGES
-import logo from "../images/logo-itaf.png";
+import logo from "../images/logo-itaf.png"
 
 export const Title = () => {
   return (
     <div className="title-container">
-      <h1 className="title-title">ID-ITAF</h1>
+      <h3 className="title-title">ID generator</h3>
       <img className="title-img" src={logo} alt="logo" />
     </div>
-  );
-};
+  )
+}

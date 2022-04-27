@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext } from "react"
 // CONTEXT
-import { DataContext } from "../context";
+import { DataContext } from "../context"
 
 export const InputInfo = () => {
   const {
@@ -10,7 +10,7 @@ export const InputInfo = () => {
     handleChange,
     handleFocus,
     idProgressivo,
-  } = useContext(DataContext);
+  } = useContext(DataContext)
 
   return (
     <form className="numero-container" onSubmit={handleSubmit}>
@@ -30,5 +30,5 @@ export const InputInfo = () => {
         GENERA
       </button>
     </form>
-  );
-};
+  )
+}

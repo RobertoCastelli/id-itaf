@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext } from "react"
 // CONTEXT
-import { DataContext } from "../context";
+import { DataContext } from "../context"
 
 export const Elenco = () => {
-  const { anno, elencoDocs } = useContext(DataContext);
+  const { anno, elencoDocs } = useContext(DataContext)
   return (
     <div className="elenco-container">
       {elencoDocs.length !== 0 ? (
@@ -11,9 +11,11 @@ export const Elenco = () => {
           {elencoDocs.map((doc) => {
             return (
               <li key={doc.id}>
-                {doc.id}/{anno} - {doc.descrizione}
+                <div className="elenco-li">
+                  {doc.id}/{anno} {doc.createdAt} ➡ {doc.descrizione}
+                </div>
               </li>
-            );
+            )
           })}
         </ul>
       ) : (
@@ -22,5 +24,5 @@ export const Elenco = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
