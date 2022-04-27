@@ -12,7 +12,10 @@ export const Elenco = () => {
             return (
               <li key={doc.id}>
                 <div className="elenco-li">
-                  {doc.id}/{anno} {doc.createdAt} ➡ {doc.descrizione}
+                  <span className="elenco-id">
+                    {doc.id}/{anno}
+                  </span>{" "}
+                  - {doc.createdAt} ➡ {doc.descrizione}
                 </div>
               </li>
             )

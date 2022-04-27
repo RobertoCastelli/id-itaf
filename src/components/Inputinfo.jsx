@@ -14,7 +14,7 @@ export const InputInfo = () => {
 
   return (
     <form className="numero-container" onSubmit={handleSubmit}>
-      <h1 className="numero-content">
+      <h1 className="numero-numero">
         {idProgressivo}/{anno}
       </h1>
       <input

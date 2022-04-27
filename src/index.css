@@ -4,7 +4,7 @@
 body {
   margin: 0;
   padding: 0;
-  letter-spacing: 0.09rem;
+  letter-spacing: 0.05rem;
   font-size: 0.8rem;
   color: var(--black);
   font-family: "Verdana", sans-serif;
@@ -72,10 +72,19 @@ button:active {
 /* ----------- */
 .numero-container {
   display: grid;
-  margin: auto;
+  margin: 1rem auto;
   max-width: 300px;
   text-align: center;
   gap: 1rem;
+}
+.numero-numero{
+  border: 5px outset lightgrey;
+  height: 50px;
+  align-self: center;
+  background-color: lightgray;
+  width: 200px;
+  margin: auto;
+  
 }
 
 /* ----- */
@@ -92,17 +101,23 @@ button:active {
   align-self: center;
 }
 .title-img {
-  transform: scale(0.8);
+  width: 80px;
 }
 
+/* ------ */
+/* ELENCO */
+/* ------ */
 .elenco-container {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 .elenco-vuoto {
   text-align: center;
 }
-
-
 .elenco-li{
+  margin-top: 0.3rem;
   font-size: small;
+}
+.elenco-id {
+  font-weight: bold;
+  color: brown;
 }
