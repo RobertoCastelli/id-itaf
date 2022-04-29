@@ -8,14 +8,14 @@ export const Elenco = () => {
     <div className="elenco-container">
       {elencoDocs.length !== 0 ? (
         <ul>
-          {elencoDocs.map((doc) => {
+          {elencoDocs.map((doc, i) => {
             return (
-              <li key={doc.id}>
+              <li key={i}>
                 <div className="elenco-li">
                   <span className="elenco-id">
-                    {doc.id}/{anno}
+                    {doc.rif}/{anno}
                   </span>{" "}
-                  - {doc.createdAt} ➡ {doc.descrizione}
+                  ➡ {doc.descrizione}
                 </div>
               </li>
             )

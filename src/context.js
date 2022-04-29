@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react"
 // FIREBASE
 import { db } from "./firebase"
-import { addDoc, getDocs, collection } from "firebase/firestore"
+import {
+  addDoc,
+  query,
+  onSnapshot,
+  collection,
+  orderBy,
+} from "firebase/firestore"
 
 // CREATE CONTEXT
 export const DataContext = React.createContext()
@@ -9,7 +15,11 @@ export const DataContext = React.createContext()
 const ContextProvider = (props) => {
   // TODAY DATEPICKER
   const anno = new Date().toISOString().substring(2, 4)
-  const today = new Date().toLocaleString().substring(0, 4)
+  const today = new Date().toLocaleString().substring(0, 10)
+
+  // FIREBASE VARIABLES
+  const colRef = collection(db, "ids")
+  const q = query(colRef, orderBy("rif", "desc"))
 
   // STATE
   const [inputText, setInputText] = useState("")
@@ -24,37 +34,37 @@ const ContextProvider = (props) => {
 
   // ADD DOC IN DB
   const createDoc = async () => {
-    await addDoc(collection(db, "ids"), {
-      id: idProgressivo,
+    await addDoc(colRef, {
+      rif: idProgressivo,
       descrizione: inputText,
-      createdAt: today,
     })
-  }
-
-  // SUBMIT A DOC IN DB
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    window.confirm(`Premere OK per caricare doc: ${idProgressivo}`)
-      ? createDoc()
-      : alert("Caricamento annullato")
   }
 
   // INCREMENTA ID PROGRESSIVO - inserisce 0 davanti a singoli digits
   useEffect(() => {
-    setIdProgressivo(`0${elencoDocs.length}`.slice(-2))
+    setIdProgressivo(elencoDocs.length + 1)
   }, [elencoDocs])
 
   // SHOW ELENCO FROM DB
-  useEffect(() => {
-    const showElenco = async () => {
-      const idsSnapshot = await getDocs(collection(db, "ids"))
-      const idsList = idsSnapshot.docs.map((doc) => doc.data())
-      setElencoDocs(idsList)
+  onSnapshot(q, (snapshot) => {
+    let documents = []
+    snapshot.docs.forEach((doc) => documents.push(doc.data()))
+    setElencoDocs(documents)
+  })
+
+  // SUBMIT A DOC IN DB
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (
+      window.confirm(`Premere OK per caricare documento ➡ ${idProgressivo}`)
+    ) {
+      createDoc()
+      // clear input text after submit
+      setInputText("")
+    } else {
+      alert("Caricamento annullato")
     }
-    return () => {
-      showElenco()
-    }
-  }, [])
+  }
 
   //~~~~~~~~~~~~~~~~//
   //    RENDER      //
