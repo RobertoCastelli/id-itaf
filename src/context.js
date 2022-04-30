@@ -13,18 +13,26 @@ import {
 export const DataContext = React.createContext()
 
 const ContextProvider = (props) => {
+  //~~~~~~~~~~~~~~~~~~~//
+  //     VARIABLES     //
+  //~~~~~~~~~~~~~~~~~~~//
+
   // TODAY DATEPICKER
   const anno = new Date().toISOString().substring(2, 4)
-  const today = new Date().toLocaleString().substring(0, 10)
+  const today = new Date().toLocaleString().substring(0, 9)
 
   // FIREBASE VARIABLES
   const colRef = collection(db, "ids")
   const q = query(colRef, orderBy("rif", "desc"))
 
-  // STATE
+  // USE STATE
   const [inputText, setInputText] = useState("")
   const [elencoDocs, setElencoDocs] = useState([])
   const [idProgressivo, setIdProgressivo] = useState(0)
+
+  //~~~~~~~~~~~~~~~~~~~//
+  //     FUNCTIONS     //
+  //~~~~~~~~~~~~~~~~~~~//
 
   // GET INPUT TEXT
   const handleChange = (e) => setInputText(e.target.value)
@@ -42,7 +50,7 @@ const ContextProvider = (props) => {
 
   // INCREMENTA ID PROGRESSIVO - inserisce 0 davanti a singoli digits
   useEffect(() => {
-    setIdProgressivo(elencoDocs.length + 1)
+    setIdProgressivo(`0${elencoDocs.length + 1}`.slice(-2))
   }, [elencoDocs])
 
   // SHOW ELENCO FROM DB
@@ -55,6 +63,7 @@ const ContextProvider = (props) => {
   // SUBMIT A DOC IN DB
   const handleSubmit = (e) => {
     e.preventDefault()
+
     if (
       window.confirm(`Premere OK per caricare documento ➡ ${idProgressivo}`)
     ) {
@@ -69,11 +78,13 @@ const ContextProvider = (props) => {
   //~~~~~~~~~~~~~~~~//
   //    RENDER      //
   //~~~~~~~~~~~~~~~~//
+
   return (
     <div>
       <DataContext.Provider
         value={{
           anno,
+          today,
           inputText,
           elencoDocs,
           idProgressivo,

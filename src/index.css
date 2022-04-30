@@ -7,6 +7,7 @@ body {
   letter-spacing: 0.05rem;
   font-size: 0.8rem;
   color: var(--black);
+  background-color: var(--sand);
   font-family: "Verdana", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,6 +15,8 @@ body {
 :root {
   --black: #333;
   --white: #f4f4f4;
+  --sand: #dfcfbe;
+  --blue: #98b4d4;
 }
 ::placeholder {
   padding-left: 0.5rem;
@@ -48,8 +51,9 @@ input {
   padding-left: 0.5rem;
   outline: none;
   border: none;
+  background-color: var(--sand);
+  border-bottom: 1px dotted var(--black);
   color: brown;
-  border-bottom: 1px solid var(--black);
 }
 input:focus {
   border-bottom: 1px solid brown;
@@ -59,12 +63,43 @@ button {
   width: 100px;
   height: 50px;
   margin: auto;
-  color: brown;
   border-radius: 0.5rem;
   border: none;
+  background-color: var(--white);
+  color: brown;
+  font-weight: bold;
 }
 button:active {
   transform: translateY(2px);
+}
+
+/* ----- */
+/* TITLE */
+/* ----- */
+.title-container {
+  display: flex;
+  position: relative;
+  padding: 1rem;
+  justify-content: space-around;
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.title-title {
+  color: brown;
+  align-self: center;
+}
+.title-date {
+  position: absolute;
+  top: 70px;
+  padding: 0.5rem;
+  background-color: var(--sand);
+  border-radius: 0.5rem;
+}
+.title-img {
+  width: 80px;
+  justify-self: flex-end;
 }
 
 /* ----------- */
@@ -77,32 +112,14 @@ button:active {
   margin: 2rem auto;
   gap: 1rem;
 }
-.numero-numero{
+.numero-numero {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 200px;
-  height: 50px;
-  border: 3px outset grey;
-  background-color: lightgray;
-  color: brown;
-}
-
-/* ----- */
-/* TITLE */
-/* ----- */
-.title-container {
-  display: flex;
-  justify-content: space-between;
-  max-width: 300px;
-  margin: auto;
-}
-.title-title {
-  color: brown;
-  align-self: center;
-}
-.title-img {
-  width: 80px;
+  height: 60px;
+  background-color: var(--blue);
+  border-radius: 0.5rem;
 }
 
 /* ------ */
@@ -114,11 +131,14 @@ button:active {
 .elenco-vuoto {
   text-align: center;
 }
-.elenco-li{
-  margin-top: 0.3rem;
+.elenco-li {
+  margin-top: 1.5rem;
   font-size: small;
 }
 .elenco-id {
   font-weight: bold;
-  color: brown;
+  padding: 0.5rem;
+  color: var(--white);
+  background-color: brown;
+  border-radius: 0.5rem;
 }

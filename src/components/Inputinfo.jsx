@@ -15,9 +15,10 @@ export const InputInfo = () => {
   return (
     <form className="numero-container" onSubmit={handleSubmit}>
       <h1 className="numero-numero">
-        {idProgressivo}/{anno}
+        ID {idProgressivo}/{anno}
       </h1>
       <input
+        required
         type="text"
         name="input"
         maxLength="30"
