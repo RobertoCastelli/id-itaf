@@ -42,6 +42,9 @@ body {
 footer {
   text-align: center;
 }
+.footer-sponsor {
+  font-size: 0.5rem;
+}
 ul {
   list-style-type: none;
   padding: 0;
@@ -82,7 +85,9 @@ button:active {
   position: relative;
   padding: 1rem;
   justify-content: space-around;
-  background-color: var(--white);
+  background-image: url("./images/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   border: 1px solid var(--black);
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;

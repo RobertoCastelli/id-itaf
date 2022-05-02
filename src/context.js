@@ -29,7 +29,7 @@ const ContextProvider = (props) => {
   const q = query(colRef, orderBy("rif", "desc"))
 
   // USE STATE
-  const [inputText, setInputText] = useState("test")
+  const [inputText, setInputText] = useState("")
   const [elencoDocs, setElencoDocs] = useState([])
   const [idProgressivo, setIdProgressivo] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
@@ -77,7 +77,7 @@ const ContextProvider = (props) => {
           return elem.descrizione.includes(inputText)
         }
       })
-      let alertFilteredList = JSON.stringify(filteredDocuments).rif
+      let alertFilteredList = JSON.stringify(filteredDocuments)
       alert(`✅ Trovato: ➠ ' ${inputText} ' con rif. ${alertFilteredList}`)
       // clear input text
       setInputText("")
