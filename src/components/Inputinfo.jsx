@@ -6,14 +6,15 @@ export const InputInfo = () => {
   const {
     anno,
     inputText,
-    handleSubmit,
     handleChange,
     handleFocus,
     idProgressivo,
+    handleGenera,
+    handleCerca,
   } = useContext(DataContext)
 
   return (
-    <form className="numero-container" onSubmit={handleSubmit}>
+    <form className="numero-container">
       <h1 className="numero-numero">
         ID {idProgressivo}/{anno}
       </h1>
@@ -27,9 +28,24 @@ export const InputInfo = () => {
         onChange={handleChange}
         onFocus={handleFocus}
       />
-      <button type="submit" className="numero-btn">
-        GENERA
-      </button>
+      <div className="numero-btns">
+        <button
+          onClick={handleGenera}
+          id="genera"
+          type="submit"
+          className="numero-btn-genera"
+        >
+          GENERA
+        </button>
+        <button
+          onClick={handleCerca}
+          id="cerca"
+          type="submit"
+          className="numero-btn-cerca"
+        >
+          CERCA
+        </button>
+      </div>
     </form>
   )
 }

@@ -1,11 +1,12 @@
-import React from "react";
+import React from "react"
 // CONTEXT
-import ContextProvider from "./context";
+import ContextProvider from "./context"
 // COMPONENTS
-import { Title } from "./components/Title";
-import { Elenco } from "./components/Elenco";
-import { Footer } from "./components/Footer";
-import { InputInfo } from "./components/Inputinfo";
+import { Title } from "./components/Title"
+import { Elenco } from "./components/Elenco"
+import { Footer } from "./components/Footer"
+import { InputInfo } from "./components/Inputinfo"
+import { Loading } from "./components/Loading"
 
 function App() {
   return (
@@ -13,13 +14,14 @@ function App() {
       <div className="container">
         <div className="content">
           <Title />
+          <Loading />
           <InputInfo />
           <Elenco />
         </div>
         <Footer />
       </div>
     </ContextProvider>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -17,18 +17,22 @@ const ContextProvider = (props) => {
   //     VARIABLES     //
   //~~~~~~~~~~~~~~~~~~~//
 
-  // TODAY DATEPICKER
+  // GET TODAY DATE && ANNO
   const anno = new Date().toISOString().substring(2, 4)
-  const today = new Date().toLocaleString().substring(0, 9)
+  const today = new Date()
+    .toLocaleString()
+    .substring(0, 9)
+    .replace(",", "")
 
   // FIREBASE VARIABLES
   const colRef = collection(db, "ids")
   const q = query(colRef, orderBy("rif", "desc"))
 
   // USE STATE
-  const [inputText, setInputText] = useState("")
+  const [inputText, setInputText] = useState("test")
   const [elencoDocs, setElencoDocs] = useState([])
   const [idProgressivo, setIdProgressivo] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
 
   //~~~~~~~~~~~~~~~~~~~//
   //     FUNCTIONS     //
@@ -40,7 +44,17 @@ const ContextProvider = (props) => {
   // CLEAR INPUT TEXT ON FOCUS
   const handleFocus = () => setInputText("")
 
-  // ADD DOC IN DB
+  // GET ELENCO DAL DB
+  let showElenco = () => {
+    onSnapshot(q, (snapshot) => {
+      let documents = []
+      snapshot.docs.forEach((doc) => documents.push(doc.data()))
+      setElencoDocs(documents)
+      setIsLoading(false)
+    })
+  }
+
+  // ADD DOCUMENTO NEL DB
   const createDoc = async () => {
     await addDoc(colRef, {
       rif: idProgressivo,
@@ -49,35 +63,58 @@ const ContextProvider = (props) => {
   }
 
   // INCREMENTA ID PROGRESSIVO - inserisce 0 davanti a singoli digits
-  useEffect(() => {
+  let showProgressivo = () =>
     setIdProgressivo(`0${elencoDocs.length + 1}`.slice(-2))
-  }, [elencoDocs])
 
-  // SHOW ELENCO FROM DB
-  onSnapshot(q, (snapshot) => {
-    let documents = []
-    snapshot.docs.forEach((doc) => documents.push(doc.data()))
-    setElencoDocs(documents)
-  })
-
-  // SUBMIT A DOC IN DB
-  const handleSubmit = (e) => {
+  // CERCA DOCUMENTO TRAMITE DESCRIZIONE
+  const handleCerca = (e) => {
     e.preventDefault()
-
-    if (
-      window.confirm(`Premere OK per caricare documento ➡ ${idProgressivo}`)
-    ) {
-      createDoc()
-      // clear input text after submit
+    if (inputText.length !== 0) {
+      let filteredDocuments = elencoDocs.filter((elem) => {
+        if (inputText === 0) {
+          return elem
+        } else {
+          return elem.descrizione.includes(inputText)
+        }
+      })
+      let alertFilteredList = JSON.stringify(filteredDocuments).rif
+      alert(`✅ Trovato: ➠ ' ${inputText} ' con rif. ${alertFilteredList}`)
+      // clear input text
       setInputText("")
     } else {
-      alert("Caricamento annullato")
+      alert("❗ Nessun documento trovato")
     }
   }
 
-  //~~~~~~~~~~~~~~~~//
-  //    RENDER      //
-  //~~~~~~~~~~~~~~~~//
+  // GENERA UN DOCUMENTO NEL DB
+  const handleGenera = (e) => {
+    setIsLoading(true)
+    e.preventDefault()
+    if (
+      inputText.length !== 0 &&
+      window.confirm(
+        `⚠ Premere OK per caricare documento ➠ rif. ${idProgressivo}`
+      )
+    ) {
+      // crea documento
+      createDoc()
+      // clear input text
+      setInputText("")
+    } else {
+      alert("❌ Caricamento annullato")
+    }
+  }
+
+  // SHOW ELENCO IN REAL TIME
+  // SHOW NUMERO PROGRESSIVO IN REAL TIME
+  useEffect(() => {
+    showElenco()
+    showProgressivo()
+  }, [elencoDocs])
+
+  //~~~~~~~~~~~~~~~//
+  //    RENDER     //
+  //~~~~~~~~~~~~~~~//
 
   return (
     <div>
@@ -87,11 +124,13 @@ const ContextProvider = (props) => {
           today,
           inputText,
           elencoDocs,
+          isLoading,
           idProgressivo,
-          handleSubmit,
           handleChange,
           handleFocus,
           setInputText,
+          handleCerca,
+          handleGenera,
         }}
       >
         {props.children}
